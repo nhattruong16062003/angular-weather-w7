@@ -1,0 +1,16 @@
+<app-header></app-header>
+<main>
+    <h2>Favorite Cities</h2>
+    <div class="favorites-grid" *ngIf="favorites$ | async as favorites">
+        <div class="weather-card" *ngFor="let weather of favorites">
+            <h3>{{weather.location}}</h3>
+            <img [src]="'https:' + weather.icon" alt="Weather icon">
+            <p class="temp">{{weather.temp_c}}°C</p>
+            <p>{{weather.condition}}</p>
+            <button (click)="removeFromFavorites(weather.location)">Remove</button>
+        </div>
+        <p *ngIf="favorites.length === 0" class="no-favorites">
+            No favorite cities yet!
+        </p>
+    </div>
+</main>

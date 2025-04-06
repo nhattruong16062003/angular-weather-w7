@@ -1,0 +1,19 @@
+<app-header></app-header>
+<main>
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchLocation" (keyup.enter)="searchWeather()" placeholder="Search city...">
+        <button (click)="searchWeather()">Search</button>
+    </div>
+
+    <div class="weather-card" *ngIf="weather$ | async as weather">
+        <h2>{{weather.location}}</h2>
+        <img [src]="'https:' + weather.icon" alt="Weather icon">
+        <p class="temp">{{weather.temp_c}}°C</p>
+        <p>{{weather.condition}}</p>
+        <p>Humidity: {{weather.humidity}}%</p>
+        <p>Wind: {{weather.wind_kph}} kph</p>
+        <button (click)="addToFavorites(weather)" [disabled]="weather.isFavorite">
+            {{weather.isFavorite ? 'Added' : 'Add to Favorites'}}
+        </button>
+    </div>
+</main>
